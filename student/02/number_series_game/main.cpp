@@ -7,7 +7,12 @@ int main()
     std::cout << "How many numbers would you like to have? ";
     std::cin >> input;
     while(toprint <= input){
-        std::cout << toprint << std::endl;
-        ++ toprint;
+        if (toprint % 3 == 0){
+            std::cout << "zip" << std::endl;
+        }
+        else{
+            std::cout << toprint << std::endl;
+        }
+        ++toprint;
     }
 }
