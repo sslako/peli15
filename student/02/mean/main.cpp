@@ -16,9 +16,9 @@ int main()
             // std::cout << total << std::endl;
         }
         mean = total / numbers;
-        std::cout << "Mean value of the given numbers is: " << mean << std::endl;
+        std::cout << "Mean value of the given numbers is " << mean << std::endl;
     }
     else{
-        std::cout << "Cannot count mean value from: " << numbers << " numbers" << std::endl;
+        std::cout << "Cannot count mean value from " << numbers << " numbers" << std::endl;
     }
 }
