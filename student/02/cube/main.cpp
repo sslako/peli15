@@ -12,7 +12,6 @@ int main()
     }
     else{
         cube = input * input * input;
-        cout << cube;
         if (cube / input / input != input){
             cout << "Error! The cube of " << input << " is not " << cube << "." << endl;
         }
