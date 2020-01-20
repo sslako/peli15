@@ -35,6 +35,6 @@ int main()
     difference_factorial = factorial(total_balls - drawn_balls);
     result = total_factorial / (drawn_factorial * difference_factorial);
 
-    cout << "The probability of guessing all " << total_balls << " balls correctly is 1/" << result << endl;
+    cout << "The probability of guessing all " << drawn_balls << " balls correctly is 1/" << result << endl;
   }
 }
