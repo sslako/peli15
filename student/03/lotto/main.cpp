@@ -21,7 +21,7 @@ int main()
   cin >> drawn_balls;
 
   if (total_balls < 0 or drawn_balls < 0){
-      cout << "The number of balls must be positive." << endl;
+      cout << "The number of balls must be a positive number." << endl;
   }
 
   else if (total_balls < drawn_balls){
@@ -30,11 +30,15 @@ int main()
 
   else{
     double total_factorial, drawn_factorial, difference_factorial, result;
-    total_factorial = factorial(total_balls);
-    drawn_factorial = factorial(drawn_balls);
-    difference_factorial = factorial(total_balls - drawn_balls);
-    result = total_factorial / (drawn_factorial * difference_factorial);
-
+    if (drawn_balls != total_balls){
+        total_factorial = factorial(total_balls);
+        drawn_factorial = factorial(drawn_balls);
+        difference_factorial = factorial(total_balls - drawn_balls);
+        result = total_factorial / (drawn_factorial * difference_factorial);
+    }
+    else{
+        result = 1;
+    }
     cout << "The probability of guessing all " << drawn_balls << " balls correctly is 1/" << result << endl;
   }
 }
