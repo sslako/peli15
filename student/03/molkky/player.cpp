@@ -2,7 +2,7 @@
 #include <string>
 
 Player::Player(std::string name):
-    name_(name) {
+    name_(name), points_(0) {
 }
 
 std::string Player::get_name(){
@@ -22,9 +22,9 @@ void Player::add_points(int points){
 
 bool Player::has_won(){
     if (points_ == 50){
-        return 1;
+        return true;
     }
     else{
-        return 0;
+        return false;
     }
 }
