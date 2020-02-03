@@ -57,14 +57,24 @@ bool is_arithmetic_series(std::vector < int >& ints){
 bool is_geometric_series(std::vector < int >& ints){
     std::vector<int>::size_type length = ints.size();
     int current = ints.at(1), previous = ints.at(0);
-    double compare_ratio = current / previous;
-    for (long unsigned int i = 1; i < length; ++i){
-        previous = ints.at(i - 1);
-        current = ints.at(i);
-        double new_ratio = current / previous;
-        if (new_ratio != compare_ratio){
-            return false;
+    if (previous != 0){
+        double compare_ratio = current / previous;
+        for (long unsigned int i = 1; i < length; ++i){
+            previous = ints.at(i - 1);
+            current = ints.at(i);
+            if (previous != 0){
+                double new_ratio = current / previous;
+                if (new_ratio != compare_ratio){
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
         }
+    }
+    else{
+        return false;
     }
     return true;
 }
