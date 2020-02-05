@@ -29,7 +29,7 @@ void produce_random_numbers(unsigned int lower, unsigned int upper)
     string keep_going;
     while (true){
         cout << "Your drawn random number is " << distribution(rand_gen) << endl;
-        cout << "Enter a seed value or an empty line: ";
+        cout << "Press enter to continue or q to quit: ";
         getline(cin, keep_going);
         if (keep_going == "q"){
             return;
