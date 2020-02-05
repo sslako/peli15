@@ -9,7 +9,7 @@ void produce_random_numbers(unsigned int lower, unsigned int upper)
     // Implement your function here
     std::default_random_engine rand_gen;
 
-    std::cout << "Enter a seed value for random number generator or an empty line: ";
+    std::cout << "Enter a seed value or an empty line: ";
     std::string seed_value = "";
     getline(std::cin, seed_value);
 
