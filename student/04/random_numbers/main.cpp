@@ -7,6 +7,35 @@ using namespace std;
 void produce_random_numbers(unsigned int lower, unsigned int upper)
 {
     // Implement your function here
+    std::default_random_engine rand_gen;
+
+    std::cout << "Enter a seed value for random number generator or an empty line: ";
+    std::string seed_value = "";
+    getline(std::cin, seed_value);
+
+    if( seed_value == "" ) {
+        // If the user did not give a seed value, use computer time as the seed value.
+        rand_gen.seed( time(NULL) );
+    } else {
+        // If the user gave a seed value, use it.
+        rand_gen.seed( stoi(seed_value) );
+    }
+
+    // Filling the board with random numbers between 0 and 4
+    // These random numbers correspond to the amount of water, i.e. the possible values of CHARACTERS
+    std::uniform_int_distribution<int> distribution(lower, upper);
+    string keep_going;
+    while (true){
+        cout << "Your drawn random number is " << distribution(rand_gen) << endl;
+        cout << "Enter a seed value or an empty line: ";
+        getline(cin, keep_going);
+        if (keep_going == "q"){
+            return;
+        }
+        cout << endl;
+    }
+
+
 }
 
 int main()
