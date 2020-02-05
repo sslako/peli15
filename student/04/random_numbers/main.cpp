@@ -13,6 +13,8 @@ void produce_random_numbers(unsigned int lower, unsigned int upper)
     std::string seed_value = "";
     getline(std::cin, seed_value);
 
+    cout << endl;
+
     if( seed_value == "" ) {
         // If the user did not give a seed value, use computer time as the seed value.
         rand_gen.seed( time(NULL) );
