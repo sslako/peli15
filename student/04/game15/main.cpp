@@ -50,22 +50,33 @@ int main()
     char command;
     unsigned int number;
     while(true){
-            play_area.print();
-            // Asking and forwarding the player's next move to the class.
-            cout << "Dir (command, number): " << endl;
-            cin >> command;
-            if (command == 'q'){
-                return EXIT_SUCCESS;
-            }
-            cin >> number;
-            cout << command << number << endl;
-            play_area.move_piece(command, number);
+        play_area.print();
+        // Asking and forwarding the player's next move to the class.
+        cout << "Dir (command, number): " << endl;
+        cin >> command;
+        if (command == 'q'){
+            return EXIT_SUCCESS;
+        }
+        cin >> number;
 
-            // Check for if the game is over and the player has won
-            if (play_area.is_game_won() == true){
-                cout << "You won!" << endl;
-                return EXIT_SUCCESS;
+        // Checking that the player's input is valid.
+        if (command == 'a' or command == 's' or command == 'd' or command == 'w'){
+            if (number < 17 and number > 0){
+                cout << command << number << endl;
+                play_area.move_piece(command, number);
             }
+            else{
+                cout << "Invalid number " << number << endl;
+            }
+        }
+        // Check for if the game is over and the player has won
+        else{
+            cout << "Unknown command " << command << endl;
+        }
+        if (play_area.is_game_won() == true){
+            cout << "You won!" << endl;
+            return EXIT_SUCCESS;
+        }
     }
 
     return EXIT_SUCCESS;

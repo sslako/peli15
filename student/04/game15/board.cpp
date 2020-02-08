@@ -164,21 +164,48 @@ void Board::move_piece(char direction, unsigned int moving_piece)
 
     // Changing the places of the hole and piece that is moving.
     int moving_to_row = row, moving_to_column = column;
+    bool is_possible = true;
     if (direction == 'a'){
-        --moving_to_column;
+        if (grid_[row][column - 1] == 16){
+            --moving_to_column;
+        }
+        else{
+            is_possible = false;
+        }
     }
     if (direction == 'd'){
-        ++moving_to_column;
+        if (grid_[row][column + 1] == 16){
+            ++moving_to_column;
+        }
+        else{
+            is_possible = false;
+        }
+
     }
     if (direction == 's'){
+     if(grid_[row + 1][column] == 16){
         ++moving_to_row;
     }
-    if (direction == 'w'){
-        --moving_to_row;
+        else{
+            is_possible = false;
+        }
     }
-
-    grid_[moving_to_row][moving_to_column] = moving_piece;
-    grid_[row][column] = 16;
+    if (direction == 'w'){
+        if(grid_[row - 1][column] == 16) {
+        --moving_to_row;
+        }
+         else{
+            is_possible = false;
+        }
+    }
+    cout << direction << endl;
+    if (is_possible){
+        grid_[moving_to_row][moving_to_column] = moving_piece;
+        grid_[row][column] = 16;
+    }
+    else{
+        cout << "Impossible direction: " << direction << endl;
+    }
 }
 
 bool Board::is_game_won()
