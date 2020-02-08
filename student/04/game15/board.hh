@@ -16,6 +16,9 @@
 #ifndef BOARD_HH
 #define BOARD_HH
 #include <vector>
+#include <iostream>
+
+using namespace std;
 
 const int SIZE = 4;
 
@@ -26,20 +29,38 @@ public:
     // 1. Implement a constructor that fills the game grid with empties or such
     // and two initialize methods
     // 2. Implement two constructors, one for each initialization way
+    bool is_working_correctly;
 
+    Board(bool random_board);
     // Prints the game grid
     void print();
 
     // More methods
 
 private:
-    // Shuffles the numbers vector by using seed as a seed value
-    void my_shuffle(std::vector<unsigned int>& numbers, int seed);
-
     // Game grid for the 15 puzzle
+
     std::vector<std::vector<unsigned int>> grid_;
 
-    // More attributes/methods
+    // Attribute for determining the initialization of the board
+
+    bool is_random_initialization_;
+
+    // Shuffles the numbers vector by using seed as a seed value
+
+    void my_shuffle(std::vector<unsigned int>& numbers, int seed);
+
+    // Takes a vector with generated values and places them into the grid_ vector
+
+    void build_board(std::vector<unsigned int>& values);
+
+    // Creates the game board in a random fashion with the help of my_shuffle
+
+    void random_initialization();
+
+    // Creates the game board in the order that the user inputs numbers
+
+    int user_initialization();
 };
 
 #endif // BOARD_HH

@@ -10,22 +10,45 @@
  * and by dot when printing the game board.
  *
  * Program author ( Fill with your own info )
- * Name: Teemu Teekkari
- * Student number: 123456
- * UserID: teekkart ( Necessary due to gitlab folder naming. )
- * E-Mail: teemu.teekkari@tuni.fi
+ * Name: Lauri Koivunen
+ * Student number: 292028
+ * UserID: sslako ( Necessary due to gitlab folder naming. )
+ * E-Mail: lauri.j.koivunen@tuni.fi
  *
  * Notes about the program and it's implementation:
  *
  * */
 
 #include "board.hh"
+#include <string>
+#include <iostream>
+using namespace std;
 
 // More functions
 
 int main()
 {
     // More functionality
+    string input = "";
+    bool is_random;
+
+    while (true){
+        cout << "Random initialization (y/n): ";
+        cin >> input;
+        if (input == "y" or input == "Y"){
+            is_random = true;
+            break;
+        }
+        else if (input == "n" or input == "N"){
+            is_random = false;
+            break;
+        }
+    }
+    Board play_area = Board(is_random);
+    if (play_area.is_working_correctly == false){
+        return EXIT_FAILURE;
+    }
+    play_area.print();
 
     return EXIT_SUCCESS;
 }
