@@ -35,9 +35,13 @@ public:
     // Prints the game grid
     void print();
 
-    // More methods
+    // Moves a piece to the empty spot
 
     void move_piece(char direction, unsigned int moving_piece);
+
+    // Method for checking if the board is in order and the player has won
+
+    bool is_game_won();
 
 private:
     // Game grid for the 15 puzzle

@@ -24,14 +24,11 @@
 #include <iostream>
 using namespace std;
 
-// More functions
-
 int main()
 {
-    // More functionality
+    // Determining the method for initializing the board and then creating it.
     string input = "";
     bool is_random;
-
     while (true){
         cout << "Random initialization (y/n): ";
         cin >> input;
@@ -49,10 +46,12 @@ int main()
         return EXIT_FAILURE;
     }
 
+    // The basic structure for completing a player's turn.
     char command;
     unsigned int number;
     while(true){
             play_area.print();
+            // Asking and forwarding the player's next move to the class.
             cout << "Dir (command, number): " << endl;
             cin >> command;
             if (command == 'q'){
@@ -61,6 +60,12 @@ int main()
             cin >> number;
             cout << command << number << endl;
             play_area.move_piece(command, number);
+
+            // Check for if the game is over and the player has won
+            if (play_area.is_game_won() == true){
+                cout << "You won!" << endl;
+                return EXIT_SUCCESS;
+            }
     }
 
     return EXIT_SUCCESS;

@@ -37,6 +37,7 @@ Board::Board(bool random_board): is_random_initialization_(random_board), grid_(
 
 void Board::build_board(std::vector<unsigned int>& values)
 {
+    // Going through a vector and placing the values in to the grid_ - 2dimensional vector for storing the game board
     int values_index = 0;
     for(int i = 0;i < SIZE;i++)
        {
@@ -60,6 +61,7 @@ void Board::build_board(std::vector<unsigned int>& values)
 
 void Board::random_initialization()
 {
+    // Creating the board with a seed given by the player or taken from the clock.
     cout << "Enter a seed value (or an empty line): ";
     string seed_value = "";
     int seed;
@@ -81,6 +83,7 @@ void Board::random_initialization()
 
 int Board::user_initialization()
 {
+    // Creating the board with values given by the player and checking all the numbers 1-16 are in the set of numbers given.
     std::vector <unsigned int> user_order;
     cout << "Enter the numbers 1-16 in a desired order (16 means empty):" << endl;
     unsigned int line;
@@ -145,6 +148,7 @@ void Board::my_shuffle(std::vector<unsigned int> &numbers, int seed)
 
 void Board::move_piece(char direction, unsigned int moving_piece)
 {
+    // FInding the piece that the user wants to move from the 2-dimensional vector.
     int row, column;
     for (int i = 0; i < SIZE; ++i){
         for (int j = 0; j < SIZE; ++j){
@@ -158,6 +162,7 @@ void Board::move_piece(char direction, unsigned int moving_piece)
         }
     }
 
+    // Changing the places of the hole and piece that is moving.
     int moving_to_row = row, moving_to_column = column;
     if (direction == 'a'){
         --moving_to_column;
@@ -174,5 +179,20 @@ void Board::move_piece(char direction, unsigned int moving_piece)
 
     grid_[moving_to_row][moving_to_column] = moving_piece;
     grid_[row][column] = 16;
+}
+
+bool Board::is_game_won()
+{
+    // Checking if game is over by going through the grid_ and seeing if it's in order.
+    unsigned int checking = 1;
+    for (int i = 0; i < SIZE; ++i){
+        for (int j = 0; j < SIZE; ++j){
+            if (grid_[i][j] != checking){
+                return false;
+            }
+            ++ checking;
+        }
+    }
+    return true;
 }
 
