@@ -37,6 +37,8 @@ public:
 
     // More methods
 
+    void move_piece(char direction, unsigned int moving_piece);
+
 private:
     // Game grid for the 15 puzzle
 
@@ -61,6 +63,7 @@ private:
     // Creates the game board in the order that the user inputs numbers
 
     int user_initialization();
+
 };
 
 #endif // BOARD_HH

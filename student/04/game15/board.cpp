@@ -143,3 +143,36 @@ void Board::my_shuffle(std::vector<unsigned int> &numbers, int seed)
     }
 }
 
+void Board::move_piece(char direction, unsigned int moving_piece)
+{
+    int row, column;
+    for (int i = 0; i < SIZE; ++i){
+        for (int j = 0; j < SIZE; ++j){
+            if (grid_.at(i).at(j) == moving_piece){
+                row = i;
+                column = j;
+                i = SIZE;
+                break;
+            }
+
+        }
+    }
+
+    int moving_to_row = row, moving_to_column = column;
+    if (direction == 'a'){
+        --moving_to_column;
+    }
+    if (direction == 'd'){
+        ++moving_to_column;
+    }
+    if (direction == 's'){
+        ++moving_to_row;
+    }
+    if (direction == 'w'){
+        --moving_to_row;
+    }
+
+    grid_[moving_to_row][moving_to_column] = moving_piece;
+    grid_[row][column] = 16;
+}
+

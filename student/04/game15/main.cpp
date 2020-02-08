@@ -48,7 +48,20 @@ int main()
     if (play_area.is_working_correctly == false){
         return EXIT_FAILURE;
     }
-    play_area.print();
+
+    char command;
+    unsigned int number;
+    while(true){
+            play_area.print();
+            cout << "Dir (command, number): " << endl;
+            cin >> command;
+            if (command == 'q'){
+                return EXIT_SUCCESS;
+            }
+            cin >> number;
+            cout << command << number << endl;
+            play_area.move_piece(command, number);
+    }
 
     return EXIT_SUCCESS;
 }
