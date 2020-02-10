@@ -88,12 +88,12 @@ int main()
                 play_area.move_piece(command_char, number);
             }
             else{
-                cout << "Invalid number " << number << endl;
+                cout << "Invalid number: " << number << endl;
             }
         }
         // Check for if the game is over and the player has won
         else{
-            cout << "Unknown command " << command << endl;
+            cout << "Unknown command: " << command << endl;
         }
         if (play_area.is_game_won() == true){
             play_area.print();

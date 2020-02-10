@@ -241,11 +241,12 @@ bool Board::is_game_winnable()
         for (int j = 0; j < SIZE; ++j){
             checking = grid_[i][j];
             if (checking != 16){
-                // cout << checking << endl;    Test print
+                 // cout << checking << endl;    Test print
 
                 // First checking rest of the row where the current number is located
-                for (int m = j; m < SIZE; ++m){
-                    against = grid_[i][j];
+                for (int m = j + 1; m < SIZE; ++m){
+                    against = grid_[i][m];
+                    // cout << against << endl;     Test print
                     if (checking > against){
                         ++inversions;
                     }
