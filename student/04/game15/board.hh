@@ -43,6 +43,9 @@ public:
 
     bool is_game_won();
 
+
+    bool is_game_winnable();
+
 private:
     // Game grid for the 15 puzzle
 

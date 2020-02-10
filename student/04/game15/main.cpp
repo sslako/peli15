@@ -46,6 +46,20 @@ int main()
         return EXIT_FAILURE;
     }
 
+    play_area.print();
+
+   // if (play_area.is_game_winnable() == false){
+       // cout << "Game is not solvable. What a pity." << endl;
+
+        //play_area.print();
+
+        //return EXIT_SUCCESS;
+  //  }
+
+    play_area.print();
+
+    cout << "Game is solvable: Go ahead!" << endl;
+
     // The basic structure for completing a player's turn.
     char command;
     unsigned int number;
@@ -74,6 +88,7 @@ int main()
             cout << "Unknown command " << command << endl;
         }
         if (play_area.is_game_won() == true){
+            play_area.print();
             cout << "You won!" << endl;
             return EXIT_SUCCESS;
         }

@@ -164,38 +164,30 @@ void Board::move_piece(char direction, unsigned int moving_piece)
 
     // Changing the places of the hole and piece that is moving.
     int moving_to_row = row, moving_to_column = column;
-    bool is_possible = true;
+    bool is_possible = false;
     if (direction == 'a'){
         if (grid_[row][column - 1] == 16){
             --moving_to_column;
-        }
-        else{
-            is_possible = false;
+            is_possible = true;
         }
     }
     if (direction == 'd'){
         if (grid_[row][column + 1] == 16){
             ++moving_to_column;
-        }
-        else{
-            is_possible = false;
+            is_possible = true;
         }
 
     }
-    if (direction == 's'){
-     if(grid_[row + 1][column] == 16){
-        ++moving_to_row;
+    if (direction == 's' and row != SIZE - 1){
+         if(grid_[row + 1][column] == 16){
+            ++moving_to_row;
+             is_possible = true;
+         }
     }
-        else{
-            is_possible = false;
-        }
-    }
-    if (direction == 'w'){
+    if (direction == 'w' and row != 0){
         if(grid_[row - 1][column] == 16) {
-        --moving_to_row;
-        }
-         else{
-            is_possible = false;
+            --moving_to_row;
+            is_possible = true;
         }
     }
     cout << direction << endl;
@@ -223,3 +215,45 @@ bool Board::is_game_won()
     return true;
 }
 
+bool Board::is_game_winnable()
+{
+    int row, column, moving_row;
+    for (int i = 0; i < SIZE; ++i){
+        for (int j = 0; j < SIZE; ++j){
+            if (grid_[i][j] == 16){
+                row = i;
+                column = j;
+                i = SIZE;
+                break;
+            }
+        }
+    }
+
+    for (moving_row = row + 1; moving_row < SIZE; ++moving_row){
+        Board::move_piece('w', grid_[moving_row][column]);
+    }
+
+    unsigned int checking, inversions = 0;
+    for (int i = 0; i < SIZE; ++i){
+        for (int j = 0; j < SIZE; ++j){
+            checking = grid_[i][j];
+            for (int k = i; k < SIZE; ++k){
+                for (int l = j + 1; l < SIZE; ++l){
+                    if (checking < grid_[k][l]){
+                        ++inversions;
+                    }
+                }
+            }
+        }
+    }
+    while (moving_row != row){
+        --moving_row;
+        Board::move_piece('s', grid_[moving_row][column]);
+    }
+    if (inversions % 2 == 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
