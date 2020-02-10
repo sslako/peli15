@@ -230,7 +230,7 @@ bool Board::is_game_winnable()
         }
     }
 
-    // Moving the whole to the bottom row
+    // Moving the 'hole' to the bottom row
     for (moving_row = row + 1; moving_row < SIZE; ++moving_row){
         Board::move_piece('w', grid_[moving_row][column]);
     }
@@ -242,8 +242,8 @@ bool Board::is_game_winnable()
             checking = grid_[i][j];
             if (checking != 16){
                 for (int k = i; k < SIZE; ++k){
-                    for (int l = j + 1; l < SIZE; ++l){
-                        if (checking < grid_[k][l]){
+                    for (int l = j; l < SIZE; ++l){
+                        if (checking > grid_[k][l]){
                             ++inversions;
                         }
                     }

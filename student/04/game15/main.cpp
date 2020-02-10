@@ -67,23 +67,25 @@ int main()
     cout << "Game is solvable: Go ahead!" << endl;
 
     // The basic structure for completing a player's turn.
-    char command;
+    string command;
+    char command_char;
     unsigned int number;
     while(true){
         play_area.print();
         // Asking and forwarding the player's next move to the class.
         cout << "Dir (command, number): " << endl;
         cin >> command;
-        if (command == 'q'){
+        if (command == "q"){
             return EXIT_SUCCESS;
         }
         cin >> number;
 
         // Checking that the player's input is valid.
-        if (command == 'a' or command == 's' or command == 'd' or command == 'w'){
+        if (command == "a" or command == "s" or command == "d" or command == "w"){
             if (number < 17 and number > 0){
                 // cout << command << number << endl;   Test print
-                play_area.move_piece(command, number);
+                command_char = command[0];
+                play_area.move_piece(command_char, number);
             }
             else{
                 cout << "Invalid number " << number << endl;
