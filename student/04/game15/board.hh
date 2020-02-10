@@ -3,11 +3,11 @@
  * Class: Board
  *  Describes a two-dimensional grid for puzzle 15 with necessary functions.
  *
- * Program author ( Fill with your own info )
- * Name: Teemu Teekkari
- * Student number: 123456
- * UserID: teekkart ( Necessary due to gitlab folder naming. )
- * E-Mail: teemu.teekkari@tuni.fi
+ * Program author
+ * Name: Lauri Koivunen
+ * Student number: 292028
+ * UserID: sslako
+ * E-Mail: lauri.j.koivunen@tuni.fi
  *
  * Notes:
  *
@@ -25,14 +25,16 @@ const int SIZE = 4;
 class Board
 {
 public:
-    // For creating and initializing the grid, you have at least two choices:
-    // 1. Implement a constructor that fills the game grid with empties or such
-    // and two initialize methods
-    // 2. Implement two constructors, one for each initialization way
+    // Attribute for telling the main function if the user-dictated board was generated correctly
+
     bool is_working_correctly;
 
+    // Class initializing function, splits into two different functions depending on method of initialization
+
     Board(bool random_board);
+
     // Prints the game grid
+
     void print();
 
     // Moves a piece to the empty spot
@@ -43,6 +45,7 @@ public:
 
     bool is_game_won();
 
+    // Method used at the beginning of the game to see if the game is winnable
 
     bool is_game_winnable();
 

@@ -9,7 +9,7 @@
  * Empty space is represented by the number 16 in the code (constant EMPTY)
  * and by dot when printing the game board.
  *
- * Program author ( Fill with your own info )
+ * Program author
  * Name: Lauri Koivunen
  * Student number: 292028
  * UserID: sslako ( Necessary due to gitlab folder naming. )
@@ -17,6 +17,9 @@
  *
  * Notes about the program and it's implementation:
  *
+ * The program has been mostly created in the class Board and the main function 
+ * contains only some bits in it. All command asking is done in main and these 
+ * values are then given to the class. 
  * */
 
 #include "board.hh"
@@ -40,23 +43,26 @@ int main()
             is_random = false;
             break;
         }
+        else{
+            cout << "Unknown choice: " << input << endl;
+        }
     }
     Board play_area = Board(is_random);
     if (play_area.is_working_correctly == false){
         return EXIT_FAILURE;
     }
 
-    play_area.print();
+    // play_area.print();   Test print
 
-   // if (play_area.is_game_winnable() == false){
-       // cout << "Game is not solvable. What a pity." << endl;
+   if (play_area.is_game_winnable() == false){
+       cout << "Game is not solvable. What a pity." << endl;
 
-        //play_area.print();
+        // play_area.print();   Test print
 
-        //return EXIT_SUCCESS;
-  //  }
+        return EXIT_SUCCESS;
+    }
 
-    play_area.print();
+    // play_area.print();   Test print
 
     cout << "Game is solvable: Go ahead!" << endl;
 
@@ -76,7 +82,7 @@ int main()
         // Checking that the player's input is valid.
         if (command == 'a' or command == 's' or command == 'd' or command == 'w'){
             if (number < 17 and number > 0){
-                cout << command << number << endl;
+                // cout << command << number << endl;   Test print
                 play_area.move_piece(command, number);
             }
             else{

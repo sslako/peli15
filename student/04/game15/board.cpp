@@ -2,11 +2,11 @@
  *
  * Class: Board
  *
- * Program author ( Fill with your own info )
- * Name: Teemu Teekkari
- * Student number: 123456
- * UserID: teekkart ( Necessary due to gitlab folder naming. )
- * E-Mail: teemu.teekkari@tuni.fi
+ * Program author
+ * Name: Lauri Koivunen
+ * Student number: 292028
+ * UserID: sslako
+ * E-Mail: lauri.j.koivunen@tuni.fi
  *
  * Notes:
  *
@@ -24,7 +24,7 @@ const int EMPTY = 16;
 const unsigned int PRINT_WIDTH = 5;
 
 
-Board::Board(bool random_board): is_random_initialization_(random_board), grid_(), is_working_correctly(true)
+Board::Board(bool random_board): is_working_correctly(true), grid_(), is_random_initialization_(random_board)
 {
     if (is_random_initialization_ == true){
         Board::random_initialization();
@@ -48,15 +48,15 @@ void Board::build_board(std::vector<unsigned int>& values)
                ++ values_index;
 
            }
-           //cout<<typeid(temp).name()<<endl;
            grid_.push_back(temp);
        }
-   for(int i = 0; i < SIZE; i++){
-       for(int j = 0; j < SIZE; j++){
+   /* Test print:
+    * for(int i = 0; i < SIZE; i++){
+        for(int j = 0; j < SIZE; j++){
            cout << grid_[i][j] << " ";
        }
        cout << endl;
-    }
+    } */
 }
 
 void Board::random_initialization()
@@ -75,7 +75,7 @@ void Board::random_initialization()
         seed = stoi(seed_value);
     }
     std::vector<unsigned int> order = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-    cout << seed << endl;
+    // cout << seed << endl;    Test print
     Board::my_shuffle(order, seed);
     Board::build_board(order);
 
@@ -94,7 +94,7 @@ int Board::user_initialization()
         user_order.push_back(line);
 
     }
-    cout << "works" << endl;
+    // cout << "works" << endl;     Test print
     std::vector <unsigned int> ordered = user_order;
     std::sort(ordered.begin(), ordered.end());
     for (unsigned int i = 0; i < 16; ++i){
@@ -105,7 +105,7 @@ int Board::user_initialization()
         }
     }
 
-    cout << "checked" << endl;
+    // cout << "checked" << endl;   Test print
 
     Board::build_board(user_order);
     return EXIT_SUCCESS;
@@ -148,7 +148,7 @@ void Board::my_shuffle(std::vector<unsigned int> &numbers, int seed)
 
 void Board::move_piece(char direction, unsigned int moving_piece)
 {
-    // FInding the piece that the user wants to move from the 2-dimensional vector.
+    // Finding the piece that the user wants to move from the 2-dimensional vector.
     int row, column;
     for (int i = 0; i < SIZE; ++i){
         for (int j = 0; j < SIZE; ++j){
@@ -190,7 +190,7 @@ void Board::move_piece(char direction, unsigned int moving_piece)
             is_possible = true;
         }
     }
-    cout << direction << endl;
+    // cout << direction << endl;   Test print
     if (is_possible){
         grid_[moving_to_row][moving_to_column] = moving_piece;
         grid_[row][column] = 16;
@@ -217,6 +217,7 @@ bool Board::is_game_won()
 
 bool Board::is_game_winnable()
 {
+    // Finding the 'hole' from the gmame board
     int row, column, moving_row;
     for (int i = 0; i < SIZE; ++i){
         for (int j = 0; j < SIZE; ++j){
@@ -229,27 +230,36 @@ bool Board::is_game_winnable()
         }
     }
 
+    // Moving the whole to the bottom row
     for (moving_row = row + 1; moving_row < SIZE; ++moving_row){
         Board::move_piece('w', grid_[moving_row][column]);
     }
 
+    // Calculating the number of inversions
     unsigned int checking, inversions = 0;
     for (int i = 0; i < SIZE; ++i){
         for (int j = 0; j < SIZE; ++j){
             checking = grid_[i][j];
-            for (int k = i; k < SIZE; ++k){
-                for (int l = j + 1; l < SIZE; ++l){
-                    if (checking < grid_[k][l]){
-                        ++inversions;
+            if (checking != 16){
+                for (int k = i; k < SIZE; ++k){
+                    for (int l = j + 1; l < SIZE; ++l){
+                        if (checking < grid_[k][l]){
+                            ++inversions;
+                        }
                     }
                 }
             }
         }
     }
+
+    // Moving the hole back to it's original location
+    --moving_row;
     while (moving_row != row){
         --moving_row;
         Board::move_piece('s', grid_[moving_row][column]);
     }
+
+    // Calculating whether there are an odd or even number of inversions and returning a corresponding value
     if (inversions % 2 == 0){
         return true;
     }
