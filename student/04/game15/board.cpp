@@ -236,15 +236,29 @@ bool Board::is_game_winnable()
     }
 
     // Calculating the number of inversions
-    unsigned int checking, inversions = 0;
+    unsigned int checking, against, inversions = 0;
     for (int i = 0; i < SIZE; ++i){
         for (int j = 0; j < SIZE; ++j){
             checking = grid_[i][j];
             if (checking != 16){
-                for (int k = i; k < SIZE; ++k){
-                    for (int l = j; l < SIZE; ++l){
-                        if (checking > grid_[k][l]){
+                // cout << checking << endl;    Test print
+
+                // First checking rest of the row where the current number is located
+                for (int m = j; m < SIZE; ++m){
+                    against = grid_[i][j];
+                    if (checking > against){
+                        ++inversions;
+                    }
+                }
+
+                // Second checking all remaining rows for inversions
+                for (int k = i + 1; k < SIZE; ++k){
+                    for (int l = 0; l < SIZE; ++l){
+                        against = grid_[k][l];
+                        // cout << against << endl;     Test print
+                        if (checking > against){
                             ++inversions;
+                            // cout << checking << " " << against << endl;  Test print
                         }
                     }
                 }

@@ -73,7 +73,7 @@ int main()
     while(true){
         play_area.print();
         // Asking and forwarding the player's next move to the class.
-        cout << "Dir (command, number): " << endl;
+        cout << "Dir (command, number): ";
         cin >> command;
         if (command == "q"){
             return EXIT_SUCCESS;
