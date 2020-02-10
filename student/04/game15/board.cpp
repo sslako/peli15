@@ -149,7 +149,7 @@ void Board::my_shuffle(std::vector<unsigned int> &numbers, int seed)
 void Board::move_piece(char direction, unsigned int moving_piece)
 {
     // Finding the piece that the user wants to move from the 2-dimensional vector.
-    int row, column;
+    int row = 0, column = 0;
     for (int i = 0; i < SIZE; ++i){
         for (int j = 0; j < SIZE; ++j){
             if (grid_.at(i).at(j) == moving_piece){
@@ -218,7 +218,7 @@ bool Board::is_game_won()
 bool Board::is_game_winnable()
 {
     // Finding the 'hole' from the gmame board
-    int row, column, moving_row;
+    int row = 0, column = 0, moving_row;
     for (int i = 0; i < SIZE; ++i){
         for (int j = 0; j < SIZE; ++j){
             if (grid_[i][j] == 16){
