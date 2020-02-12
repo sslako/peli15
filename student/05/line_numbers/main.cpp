@@ -27,7 +27,8 @@ int main()
         return EXIT_FAILURE;
     }
     else{
-        row_number = 1;
+        int row_number = 1;
+        string row;
         while (getline(input_file, row)){
             output_file << row_number << " " << row << endl;
             ++row_number;
