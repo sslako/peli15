@@ -12,8 +12,11 @@ int main()
     cout << "Output file: ";
     cin >> name_output;
 
-    ifstream input_file(name_input);
-    ofstream output_file(name_output);
+    ifstream input_file;
+    ofstream output_file;
+
+    input_file.open(name_input);
+    output_file.open(name_output);
 
     if (not input_file){
         cout << "Error! The file " << name_input << "cannot be opened." << endl;
