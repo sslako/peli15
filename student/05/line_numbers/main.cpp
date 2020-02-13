@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -19,11 +19,13 @@ int main()
     output_file.open(name_output);
 
     if (not input_file){
-        cout << "Error! The file " << name_input << "cannot be opened." << endl;
+        output_file.close();
+        cout << "Error! The file " << name_input << " cannot be opened." << endl;
         return EXIT_FAILURE;
     }
     else if (not output_file){
-        cout<< "Error! The file " << name_output << "cannot be opened." << endl;
+        input_file.close();
+        cout<< "Error! The file " << name_output << " cannot be opened." << endl;
         return EXIT_FAILURE;
     }
     else{
