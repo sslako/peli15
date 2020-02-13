@@ -16,13 +16,14 @@ int main()
     ofstream output_file;
 
     input_file.open(name_input);
-    output_file.open(name_output);
 
     if (not input_file){
         output_file.close();
         cout << "Error! The file " << name_input << " cannot be opened." << endl;
         return EXIT_FAILURE;
     }
+    output_file.open(name_output);
+
     else if (not output_file){
         input_file.close();
         cout<< "Error! The file " << name_output << " cannot be opened." << endl;
