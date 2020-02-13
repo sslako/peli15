@@ -24,7 +24,7 @@ int main()
     }
     output_file.open(name_output);
 
-    else if (not output_file){
+    if (not output_file){
         input_file.close();
         cout<< "Error! The file " << name_output << " cannot be opened." << endl;
         return EXIT_FAILURE;
