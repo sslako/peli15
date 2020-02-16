@@ -40,7 +40,7 @@ int main()
     // printout
 
     for (auto info : tally){
-        cout << info.first << ": ";
+        cout << info.first << " " << info.second.size() << ": ";
         set <int> all_rows = info.second;
         for (int rows : all_rows){
             all_rows.erase(rows);
