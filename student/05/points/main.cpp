@@ -36,5 +36,6 @@ int main()
         cout << pair.first() << ": " << pair.second << endl;
     }
 
+    input_file.close();
     return EXIT_SUCCESS;
 }
