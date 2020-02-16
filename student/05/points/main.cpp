@@ -30,7 +30,7 @@ int main()
             tally.insert({name, points});
         }
         else{
-            tally.at(name) += points;
+            tally[name]+= points;
         }
     }
     for (auto pair : tally){
