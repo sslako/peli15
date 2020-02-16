@@ -24,8 +24,8 @@ int main()
     map <string, int> tally;
     while (getline(input_file, row)){
         split_position = row.find(":");
-        name = row.substr(0, split_position - 1);
-        points = stoi(row.substr(split_position + 1));
+        name = row.substr(0, split_position);
+        points = stoi(row.substr(split_position));
         if (tally.find(name) != tally.end()){
             tally.insert({name, points});
         }
@@ -33,6 +33,9 @@ int main()
             tally[name]+= points;
         }
     }
+
+    cout << "Final scores:" << endl;
+
     for (auto pair : tally){
         cout << pair.first << ": " << pair.second << endl;
     }
