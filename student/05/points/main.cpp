@@ -25,7 +25,7 @@ int main()
     while (getline(input_file, row)){
         split_position = row.find(":");
         name = row.substr(0, split_position);
-        points = stoi(row.substr(split_position));
+        points = stoi(row.substr(split_position + 1));
         if (tally.find(name) != tally.end()){
             tally.insert({name, points});
         }
