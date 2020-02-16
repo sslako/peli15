@@ -19,13 +19,13 @@ int main()
         return EXIT_FAILURE;
     }
     string row, name;
-    int split_position;
+    string::size_type split_position;
     int points;
     map <string, int> tally;
     while (getline(input_file, row)){
         split_position = row.find(":");
-        name = row.substr(row[0], split_position);
-        points = stoi(row.substr(split_position));
+        name = row.substr(0, split_position - 1);
+        points = stoi(row.substr(split_position + 1));
         if (tally.find(name) != tally.end()){
             tally.insert({name, points});
         }
