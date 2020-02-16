@@ -30,7 +30,7 @@ int main()
             tally.insert({name, points});
         }
         else{
-            tally[name]+= points;
+            tally[name] = tally[name] + points;
         }
     }
 
