@@ -31,7 +31,7 @@ std::vector<std::string> split(const std::string& s, const char delimiter, bool 
     return result;
 }
 
-void print_subnetwork(map <string, set <string>>& recruiters, string name, int level = 1){
+void print_subnetwork(map <string, vector <string>>& recruiters, string name, int level = 1){
     cout << name << endl;
     for (string person : recruiters[name]){
         for (int i = 0; i < level; ++i){
@@ -41,7 +41,7 @@ void print_subnetwork(map <string, set <string>>& recruiters, string name, int l
     }
 }
 
-int count_subnetwork(map <string, set <string>>& recruiters, string name){
+int count_subnetwork(map <string, vector <string>>& recruiters, string name){
     int total_network = 1;
     for (string person : recruiters[name]){
         total_network += count_subnetwork(recruiters, person);
@@ -49,7 +49,7 @@ int count_subnetwork(map <string, set <string>>& recruiters, string name){
     return total_network;
 }
 
-int find_deepest_chain(map <string, set <string>>& recruiters, string name){
+int find_deepest_chain(map <string, vector <string>>& recruiters, string name){
     int deepest_chain = 0;
     int provisional = 1;
     for (string person : recruiters[name]){
@@ -66,7 +66,7 @@ int main()
 {
     // TODO: Implement the datastructure here
 
-    map <string, set <string>> recruiters;
+    map <string, vector <string>> recruiters;
 
     while(true){
         std::string line;
@@ -85,7 +85,7 @@ int main()
             std::string id2 = parts.at(2);
 
             // TODO: Implement the command here!
-            recruiters[id1].insert(id2);
+            recruiters[id1].push_back(id2);
 
 
         } else if(command == "P" or command == "p"){
