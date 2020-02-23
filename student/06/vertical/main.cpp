@@ -13,29 +13,15 @@ void print_vertical(unsigned int num)
 
 
     // Add your implementation here
-    int divisor = 1;
-    unsigned int remainder = 0;
-    while (remainder != num){
-        divisor *= 10 ;
-        remainder = num % divisor;
-    }
-    divisor /= 10;
-    unsigned int current_digit = num /divisor;
-    cout << current_digit << endl;
-    if (num != current_digit){
-        unsigned int new_num = num - divisor * current_digit;
-        int check_divisor = 1;
-        remainder = 0;
-        while (remainder != new_num){
-            check_divisor *= 10 ;
-            remainder = new_num % check_divisor;
-        }
-        while (check_divisor != divisor){
-            cout << 0 << endl;
-            check_divisor *= 10;
-        }
+    int remainder;
+    remainder = num % 10;
+    if (num >= 10){
+        unsigned int new_num;
+        new_num = num / 10;
         print_vertical(new_num);
+
     }
+    cout << remainder << endl;
 }
 
 // Do not modify rest of the code, or the automated testing won't work.
