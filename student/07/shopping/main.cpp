@@ -105,45 +105,113 @@ int read_input_file(map <string, map<string, vector<Product>>>& data_base){
     return true;
 }
 
+void print_chains(map <string, map<string, vector<Product>>>& data_base){
+    for (auto chain : data_base){
+        cout << chain.first << endl;
+    }
+}
+
+void print_stores (map <string, map<string, vector<Product>>> data_base, vector <string> command_parts){
+    string chain = command_parts.at(0);
+    if (data_base.find(chain) == data_base.end()){
+        cout << "Error: unknown chain name" << endl;
+        return;
+    }
+
+    map<string, vector<Product>> chain_locations = data_base[chain];
+    for (auto location : chain_locations){
+        cout << location.first << endl;
+    }
+
+}
+
+void print_products(map <string, map<string, vector<Product>>> data_base){
+    set <string> all_products;
+    for (auto chain : data_base){
+        for (auto store : chain.second){
+            vector <Product> products;
+            products = store.second;
+            for (Product item : products){
+                all_products.insert(item.product_name);
+            }
+        }
+    }
+    for (string product : all_products){
+        cout << product << endl;
+    }
+}
+
 int main()
 {
     map <string, map<string, vector<Product>>> data_base;
     if (not read_input_file(data_base)){
         return EXIT_FAILURE;
     }
-    cin.ignore();
+
     string command;
     while (true){
         cout << "> ";
-        getline(cin, command);
+        cin >> command;
+
+        string specifications;
+        vector <string> command_parts;
+        getline(cin, specifications);
+        command_parts = split(specifications, ' ', true);
 
         if (command == "quit"){
             return EXIT_SUCCESS;
         }
+
         else if (command == "chains"){
-            cout << "Chains command not yet implemented" << endl;
+            // cout << "Chains command not yet implemented" << endl;
+            if (command_parts.size() == 0){
+                print_chains(data_base);
+            }
+            else{
+                cout << "Error: error in command chains" << endl;
+            }
         }
+
         else if (command == "products"){
-            cout << "Products command not yet implemented" << endl;
+            // cout << "Products command not yet implemented" << endl;
+            if (command_parts.size() == 0){
+                print_products(data_base);
+            }
+            else{
+                cout << "Error: error in command products" << endl;
+            }
         }
 
-        else{
-            vector <string> command_parts;
-            command_parts = split(command, ' ');
-
-
-            if (command_parts.at(0) == "stores"){
-                cout << "Stores command not yet implemented" << endl;
+        else if (command == "stores"){
+            // cout << "Stores command not yet implemented" << endl;
+            if (command_parts.size() == 1){
+                print_stores(data_base, command_parts);
             }
-            else if (command_parts.at(0) == "selection"){
-                cout << "Selection command not yet implemented" << endl;
+            else{
+                cout << "Error: error in command stores" << endl;
             }
-            else if (command_parts.at(0) == "cheapest"){
+        }
+
+        else if (command == "cheapest"){
+            if (command_parts.size() == 1){
                 cout << "Cheapest command not yet implemented" << endl;
             }
             else{
-                cout << "Error: unknown command: " << command << endl;
+                cout << "Error: error in command cheapest" << endl;
             }
+        }
+
+        else if (command == "selection"){
+            if (command_parts.size() == 2){
+                cout << "Selection command not yet implemented" << endl;
+            }
+            else{
+                cout << "Error: error in command selection" << endl;
+            }
+        }
+
+        else{
+            cout << "Error: unknown command: " << command << endl;
         }
     }
 }
