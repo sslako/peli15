@@ -111,5 +111,39 @@ int main()
     if (not read_input_file(data_base)){
         return EXIT_FAILURE;
     }
+    cin.ignore();
+    string command;
+    while (true){
+        cout << "> ";
+        getline(cin, command);
 
+        if (command == "quit"){
+            return EXIT_SUCCESS;
+        }
+        else if (command == "chains"){
+            cout << "Chains command not yet implemented" << endl;
+        }
+        else if (command == "products"){
+            cout << "Products command not yet implemented" << endl;
+        }
+
+        else{
+            vector <string> command_parts;
+            command_parts = split(command, ' ');
+
+
+            if (command_parts.at(0) == "stores"){
+                cout << "Stores command not yet implemented" << endl;
+            }
+            else if (command_parts.at(0) == "selection"){
+                cout << "Selection command not yet implemented" << endl;
+            }
+            else if (command_parts.at(0) == "cheapest"){
+                cout << "Cheapest command not yet implemented" << endl;
+            }
+            else{
+                cout << "Error: unknown command: " << command << endl;
+            }
+        }
+    }
 }
