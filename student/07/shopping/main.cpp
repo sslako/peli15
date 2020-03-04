@@ -167,7 +167,7 @@ void print_selection(map <string, map<string, vector<Product>>>& data_base, vect
         double price = item.price;
 
         if (price == OUT_OF_STOCK){
-            cout << name << " out-of-stock" << endl;
+            cout << name << " out of stock" << endl;
         }
         else{
             cout << name << " " << price << endl;
@@ -214,7 +214,7 @@ void find_cheapest(map <string, map<string, vector<Product>>> data_base, vector<
     else{
         cout << fixed;
         cout << setprecision(2);
-        cout << cheapest_price << "euros" << endl;
+        cout << cheapest_price << " euros" << endl;
         for (auto chain : stores_with_cheapest_price){
             for (auto store : chain.second){
                 cout << chain.first << " " << store << endl;
