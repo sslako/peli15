@@ -5,20 +5,16 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 using namespace std;
 
 struct Product {
     string product_name;
     double price;
-    bool operator <(const Product& other )  {
-           return product_name < other.product_name;
-       }
-    bool operator >(const Product& other )  {
-        return product_name > other.product_name;
-    }
-    bool operator ==(const Product& other )  {
-        return product_name == other.product_name;
+    bool operator<(const Product& other) const
+    {
+        return product_name < other.product_name;
     }
 };
 
@@ -63,7 +59,7 @@ int read_input_file(map <string, map<string, vector<Product>>>& data_base){
     input_file.open(name_input);
 
     if (not input_file){
-        cout << "Error! The input file cannot be opened." << endl;
+        cout << "Error: The input file cannot be opened." << endl;
         return false;
     }
 
@@ -160,9 +156,13 @@ void print_selection(map <string, map<string, vector<Product>>>& data_base, vect
     }
 
     vector <Product> selection = data_base[chain][store];
+
     cout << fixed;
     cout << setprecision(2);
+
+    sort(selection.begin(), selection.end());
     for (Product item : selection){
+
         string name = item.product_name;
         double price = item.price;
 
