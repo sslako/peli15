@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <map>
 #include <fstream>
@@ -99,9 +100,11 @@ int read_input_file(map <string, map<string, vector<Product>>>& data_base){
         }
         else{
             cout << "Error: the input file has an erroneous line" << endl;
+            input_file.close();
             return false;
         }
     }
+    input_file.close();
     return true;
 }
 
@@ -138,6 +141,85 @@ void print_products(map <string, map<string, vector<Product>>> data_base){
     }
     for (string product : all_products){
         cout << product << endl;
+    }
+}
+
+void print_selection(map <string, map<string, vector<Product>>>& data_base, vector <string> specifications){
+    string chain, store;
+    chain = specifications.at(0);
+    store = specifications.at(1);
+
+    if (data_base.find(chain) == data_base.end()){
+        cout << "Error: unknown chain name" << endl;
+        return;
+    }
+
+    if (data_base[chain].find(store) == data_base[chain].end()){
+        cout << "Error: unknown store" << endl;
+        return;
+    }
+
+    vector <Product> selection = data_base[chain][store];
+    cout << fixed;
+    cout << setprecision(2);
+    for (Product item : selection){
+        string name = item.product_name;
+        double price = item.price;
+
+        if (price == OUT_OF_STOCK){
+            cout << name << " out-of-stock" << endl;
+        }
+        else{
+            cout << name << " " << price << endl;
+        }
+    }
+}
+
+void find_cheapest(map <string, map<string, vector<Product>>> data_base, vector<string> specifications){
+    string product = specifications.at(0);
+    double cheapest_price = -1;
+    map <string, vector<string>> stores_with_cheapest_price;
+    bool is_out_of_stock = false;
+    for (auto chain : data_base){
+        for (auto store : chain.second){
+            vector <Product> products;
+            products = store.second;
+            for (Product item : products){
+                if (item.product_name == product){
+                    double current_price = item.price;
+                    if (current_price == OUT_OF_STOCK){
+                        is_out_of_stock = true;
+                    }
+                    else if (current_price < cheapest_price or cheapest_price == -1){
+                        cheapest_price = current_price;
+                        stores_with_cheapest_price.clear();
+                        stores_with_cheapest_price[chain.first].push_back(store.first);
+                    }
+                    else if (current_price == cheapest_price){
+                        stores_with_cheapest_price[chain.first].push_back(store.first);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    if (stores_with_cheapest_price.empty()){
+        if (is_out_of_stock){
+            cout << "The product is temporarily out of stock everywhere" << endl;
+        }
+        else{
+            cout << "The product is not part of product selection" << endl;
+        }
+    }
+    else{
+        cout << fixed;
+        cout << setprecision(2);
+        cout << cheapest_price << "euros" << endl;
+        for (auto chain : stores_with_cheapest_price){
+            for (auto store : chain.second){
+                cout << chain.first << " " << store << endl;
+            }
+        }
     }
 }
 
@@ -194,7 +276,9 @@ int main()
 
         else if (command == "cheapest"){
             if (command_parts.size() == 1){
-                cout << "Cheapest command not yet implemented" << endl;
+                //cout << "Cheapest command not yet implemented" << endl;
+                find_cheapest(data_base, command_parts);
+
             }
             else{
                 cout << "Error: error in command cheapest" << endl;
@@ -203,7 +287,8 @@ int main()
 
         else if (command == "selection"){
             if (command_parts.size() == 2){
-                cout << "Selection command not yet implemented" << endl;
+                // cout << "Selection command not yet implemented" << endl;
+                print_selection(data_base, command_parts);
             }
             else{
                 cout << "Error: error in command selection" << endl;
