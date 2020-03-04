@@ -16,6 +16,9 @@ struct Product {
     {
         return product_name < other.product_name;
     }
+    void change_price(double new_price){
+        price = new_price;
+    }
 };
 
 double const OUT_OF_STOCK = -1;
@@ -49,7 +52,6 @@ int find_product(vector<Product>& source, string target){
     return -1;
 }
 
-
 int read_input_file(map <string, map<string, vector<Product>>>& data_base){
     string name_input;
     cout << "Input file: ";
@@ -59,7 +61,7 @@ int read_input_file(map <string, map<string, vector<Product>>>& data_base){
     input_file.open(name_input);
 
     if (not input_file){
-        cout << "Error: The input file cannot be opened." << endl;
+        cout << "Error: the input file cannot be opened" << endl;
         return false;
     }
 
@@ -80,11 +82,11 @@ int read_input_file(map <string, map<string, vector<Product>>>& data_base){
                 price = stod(parts.at(3));
             }
 
-            vector<Product> items_at_location = data_base[chain][location];
+            vector<Product>& items_at_location = data_base[chain][location];
             int position = find_product(items_at_location, product_name);
             if (position != -1){
-                Product current_product = items_at_location[position];
-                current_product.price = price;
+                Product& current_product = items_at_location[position];
+                current_product.change_price(price);
                 // cout << current_product.price << endl;
             }
 
