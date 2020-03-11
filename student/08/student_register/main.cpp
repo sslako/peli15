@@ -101,10 +101,10 @@ void change_phone_number(const string number, const std::string file_name,
     ofstream changing_file;
     changing_file.open(file_name);
 
-    for (auto* real_student : user_ids){
-        changing_file << real_student->student_number << ";" << real_student->user_id << ";"
-                      << real_student->name << ";" << real_student->phone_number << ";"
-                      << real_student->email << ";" << real_student->skype << endl;
+    for (auto real_student : user_ids){
+        changing_file << real_student.student_number << ";" << real_student.user_id << ";"
+                      << real_student.name << ";" << real_student.phone_number << ";"
+                      << real_student.email << ";" << real_student.skype << endl;
     }
 
 }
