@@ -88,7 +88,7 @@ void change_phone_number(const string number, const std::string file_name,
                          std::map< std::string, Student* >& user_ids){
     string new_number;
     cout << "Enter a new phone number: " << endl;
-    cin >> new_number;
+    getline(cin, new_number);
     cout << endl;
     if (!is_valid_phone_number(new_number)){
         cout << "Erroneous phone number: " << new_number << endl << endl;
@@ -101,10 +101,11 @@ void change_phone_number(const string number, const std::string file_name,
     ofstream changing_file;
     changing_file.open(file_name);
 
-    for (auto real_student : user_ids){
-        changing_file << real_student.student_number << ";" << real_student.user_id << ";"
-                      << real_student.name << ";" << real_student.phone_number << ";"
-                      << real_student.email << ";" << real_student.skype << endl;
+    for (auto id: user_ids){
+        Student* dude = id.second;
+        changing_file << dude->student_number << ";" << dude->user_id << ";"
+                      << dude->name << ";" << dude->phone_number << ";"
+                      << dude->email << ";" << dude->skype << endl;
     }
 
 }
