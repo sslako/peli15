@@ -87,11 +87,10 @@ void change_phone_number(const string number, const std::string file_name,
                          std::map< std::string, Student* >& numerical_order,
                          std::map< std::string, Student* >& user_ids){
     string new_number;
-    cout << "Enter a new phone number: " << endl;
+    cout << "Enter a new phone number: ";
     getline(cin, new_number);
     cout << endl;
     if (!is_valid_phone_number(new_number)){
-        cout << "Erroneous phone number: " << new_number << endl << endl;
         return;
     }
     Student* relevant_student;
