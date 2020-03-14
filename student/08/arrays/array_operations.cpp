@@ -36,15 +36,21 @@ void copy(int *itemptr, int *endptr, int *targetptr){
 }
 
 void reverse(int *leftptr, int *rightptr){
-    int left = *leftptr, right = *(rightptr - 1);
-    while(leftptr != rightptr){
+    --rightptr;
+    int left = *leftptr, right = *(rightptr);
+    while(true){
         *leftptr = right;
-        *(rightptr - 1) = left;
+        *(rightptr) = left;
 
         leftptr += 1;
-        rightptr -= 1;
+        if (rightptr == leftptr)
+            break;
 
-        right = *(rightptr - 1);
+        rightptr -= 1;
+        if (rightptr == leftptr)
+            break;
+
+        right = *(rightptr);
         left = *leftptr;
     }
 }
