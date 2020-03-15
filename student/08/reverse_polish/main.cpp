@@ -83,10 +83,11 @@ int main()
             return EXIT_FAILURE;
         }
     }
+    --pos;
     if (pos != stack){
         cout << "Error: Too few operators" << endl;
         return EXIT_FAILURE;
     }
-    cout << "Correct: " << *(pos - 1) << " is the result" << endl;
+    cout << "Correct: " << *pos << " is the result" << endl;
     return EXIT_SUCCESS;
 }
