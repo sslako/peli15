@@ -36,7 +36,7 @@ class Cards {
       // A dynamic data structure must have a destructor
       // that can be called to deallocate memory,
       // when the data structure is not needed any more.
-      //~Cards();
+      ~Cards();
 
     private:
       struct Card_data {
