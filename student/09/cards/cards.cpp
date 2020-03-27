@@ -64,7 +64,7 @@ bool Cards::bottom_to_top(){
 // Moves the first element of the data structure as the last one.
 // Returns false, if the data structure is empty, otherwise returns true.
 bool Cards::top_to_bottom(){
-    if (top_ == nullptr){
+    if (top_->next == nullptr){
         return false;
     }
     Card_data* moving_card = top_;
