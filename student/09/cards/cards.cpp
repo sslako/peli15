@@ -49,7 +49,6 @@ bool Cards::bottom_to_top(){
     if (top_ == nullptr){
         return false;
     }
-    Card_data* moving_card = bottom_;
     Card_data* second_last = top_;
     while(second_last->next != bottom_){
         second_last = second_last->next;
@@ -79,7 +78,7 @@ bool Cards::top_to_bottom(){
 
 // Prints the content of the data structure with ordinal numbers to the
 // output stream given as a parameter starting from the last element.
-void print_from_bottom_to_top(std::ostream& s){}
+//void printFromBottomToTop(std::ostream& s){}
 
 // A dynamic data structure must have a destructor
 // that can be called to deallocate memory,
