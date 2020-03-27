@@ -78,7 +78,7 @@ bool Cards::top_to_bottom(){
 
 // Prints the content of the data structure with ordinal numbers to the
 // output stream given as a parameter starting from the last element.
-void print_from_bottom_to_top(std::ostream& s){
+void Cards::print_from_bottom_to_top(std::ostream& s){
     s << endl;
 }
 
