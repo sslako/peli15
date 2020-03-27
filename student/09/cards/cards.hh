@@ -31,7 +31,10 @@ class Cards {
 
       // Prints the content of the data structure with ordinal numbers to the
       // output stream given as a parameter starting from the last element.
-      void print_from_bottom_to_top(std::ostream& s);
+      void print_from_bottom_to_top(std::ostream &s)
+      {
+
+      }
 
       // A dynamic data structure must have a destructor
       // that can be called to deallocate memory,
@@ -45,6 +48,7 @@ class Cards {
       };
 
       Card_data* top_;
+      Card_data* bottom_;
 
       // You can use the function below in the implementation of
       // the method print_from_bottom_to_top.
