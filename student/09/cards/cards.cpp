@@ -46,9 +46,6 @@ bool Cards::remove(int& id){
 // Moves the last element of the data structure as the first one.
 // Returns false, if the data structure is empty, otherwise returns true.
 bool Cards::bottom_to_top(){
-    if (top_ == nullptr){
-        return false;
-    }
     if (top_->next == nullptr){
         return false;
     }
