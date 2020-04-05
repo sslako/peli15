@@ -111,14 +111,18 @@ int main() {
                 }
                 double left = 0, right = 0;
                 vector <double> arguments = {left, right};
+                bool functional = true;
                 for (unsigned int i = 1; i < pieces.size(); ++i){
                     bool really_cool = string_to_double(pieces.at(i), arguments.at(i - 1));
                     if (not really_cool){
                         cout << "Error: a non-number operand." << endl;
+                        functional = false;
                         break;
                     }
                 }
-                cout << com.action(arguments.at(0), arguments.at(1)) << endl;
+                if (functional){
+                    cout << com.action(arguments.at(0), arguments.at(1)) << endl;
+                }
             }
         }
         if (not found_command){
