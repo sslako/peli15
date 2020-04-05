@@ -36,6 +36,7 @@ const vector<Command> COMMANDS = {
     {"-", 2, false, subtraction},
     {"*", 2, false, multiplication},
     {"/", 2, false, division},
+    {"^", 2, false, power},
     {"PLUS", 2, false, addition},
     {"MINUS", 2, false, subtraction},
     {"TIMES", 2, false, multiplication},
@@ -54,6 +55,8 @@ const vector<Command> COMMANDS = {
     {"DECREASE", 2, false, subtraction},
     {"MULTIPLY", 2, false, multiplication},
     {"DIVIDE", 2, false, division},
+    {"POWER", 2, false, power},
+    {"EXP", 2, false, power},
     {"STOP", 0, true, nullptr},
     {"QUIT", 0, true, nullptr},
     {"EXIT", 0, true, nullptr},
@@ -89,6 +92,38 @@ int main() {
 
         // TODO: Implement command execution here!
 
+        for(auto& x: command_to_be_executed){
+            x = toupper(x);
+        }
+
+        bool found_command = false;
+        for (auto com : COMMANDS){
+            if (com.str == command_to_be_executed){
+                found_command = true;
+                if (pieces.size() != 1 + com.parameter_number){
+                    cout << "Error: wrong number of parameters." << endl;
+                    break;
+                }
+
+                if (com.exit){
+                    cout << GREETING_AT_END << endl;
+                    return EXIT_SUCCESS;
+                }
+                double left = 0, right = 0;
+                vector <double> arguments = {left, right};
+                for (unsigned int i = 1; i < pieces.size(); ++i){
+                    bool really_cool = string_to_double(pieces.at(i), arguments.at(i - 1));
+                    if (not really_cool){
+                        cout << "Error: a non-number operand." << endl;
+                        break;
+                    }
+                }
+                cout << com.action(arguments.at(0), arguments.at(1)) << endl;
+            }
+        }
+        if (not found_command){
+            cout << "Error: unknown command." << endl;
+        }
     }
 }
 
