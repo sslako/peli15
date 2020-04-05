@@ -30,6 +30,13 @@ int main() {
     cout << endl << "print" << endl;
     deck.print(cout);
 
+    cout << endl << "remove" << endl;
+    int a;
+    deck.remove(a);
+    cout << a << endl;
+    deck.print(cout);
+
+
     cout << endl << "destructor" << endl;
     return EXIT_SUCCESS;
 }
